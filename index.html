@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Chat on WhatsApp</title>
+<style>
+body {
+    margin:0;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:sans-serif;
+    background:#ffffff;
+    text-align:center;
+    cursor:pointer;
+}
+h2 {
+    font-size:18px;
+}
+button {
+    font-size:18px;
+    padding:20px 40px;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div>
+<h2>点击下方按钮开始聊天</h2>
+<button id="waBtn">打开 WhatsApp</button>
+</div>
+
+<script>
+// ====== 在这里填入你的所有 WS 号码（国际格式，无+号） ======
+var phones = [
+"27663323496",
+"27711764389",
+"27725974065"
+// 继续加
+];
+
+// 随机选择一个号码
+function getRandomPhone() {
+    return phones[Math.floor(Math.random() * phones.length)];
+}
+
+// 点击按钮触发跳转
+document.getElementById("waBtn").addEventListener("click", function() {
+    var phone = getRandomPhone();
+    // 先尝试唤醒 App
+    window.location.href = "whatsapp://send?phone=" + phone + "&text=Hi";
+    // 1.2 秒后兜底 wa.me
+    setTimeout(function(){
+        window.location.href = "https://wa.me/" + phone + "?text=Hi";
+    }, 1200);
+});
+</script>
+
+</body>
+</html>
